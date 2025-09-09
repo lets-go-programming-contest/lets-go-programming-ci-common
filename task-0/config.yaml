@@ -1,0 +1,8 @@
+build: 
+  mode: common
+
+lint: 
+  mode: default
+
+test: 
+  mode: default
