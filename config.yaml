@@ -20,6 +20,7 @@ tasks:
         include_dirs:
           - path_type: common
             path: task-1/tests
+
   - task_name: task-2-1
     build:
       mode: module
@@ -41,3 +42,25 @@ tasks:
         include_dirs:
           - path_type: common
             path: task-2-1/tests
+
+  - task_name: task-2-2
+    build:
+      mode: module
+    lint:
+      mode: module
+      module_options:
+        configs:
+          - config_path:
+              path_type: common
+              path: task-2-2/.golangci.yaml
+            required: true
+          - config_path:
+              path_type: module
+              path: .golangci.yaml
+            required: false
+    test:
+      mode: module
+      module_options:
+        include_dirs:
+          - path_type: common
+            path: task-2-2/tests
