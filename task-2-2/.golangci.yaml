@@ -9,10 +9,12 @@ linters:
     - exportloopref
     - gomnd
     - depguard
+    - forbidigo
   fast: false
 
 issues:
   include:
+    - EXC0001 # check error from os funcs
     - EXC0004 # govet
     - EXC0005 # C-style breaks
 
@@ -29,3 +31,6 @@ linters-settings:
     rules:
       - name: duplicated-imports
         severity: error
+  cyclop:
+    max-complexity: 12
+
