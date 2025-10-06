@@ -1,0 +1,172 @@
+[
+  {
+    "num_code": 960,
+    "char_code": "XDR",
+    "value": 95.7909
+  },
+  {
+    "num_code": 344,
+    "char_code": "HKD",
+    "value": 92.5165
+  },
+  {
+    "num_code": 356,
+    "char_code": "INR",
+    "value": 87.0686
+  },
+  {
+    "num_code": 826,
+    "char_code": "GBP",
+    "value": 86.6397
+  },
+  {
+    "num_code": 417,
+    "char_code": "KGS",
+    "value": 84.0077
+  },
+  {
+    "num_code": 756,
+    "char_code": "CHF",
+    "value": 77.9487
+  },
+  {
+    "num_code": 978,
+    "char_code": "EUR",
+    "value": 76.0765
+  },
+  {
+    "num_code": 578,
+    "char_code": "NOK",
+    "value": 72.6388
+  },
+  {
+    "num_code": 840,
+    "char_code": "USD",
+    "value": 71.9778
+  },
+  {
+    "num_code": 972,
+    "char_code": "TJS",
+    "value": 70.5582
+  },
+  {
+    "num_code": 752,
+    "char_code": "SEK",
+    "value": 68.7152
+  },
+  {
+    "num_code": 860,
+    "char_code": "UZS",
+    "value": 64.2913
+  },
+  {
+    "num_code": 410,
+    "char_code": "KRW",
+    "value": 56.9219
+  },
+  {
+    "num_code": 392,
+    "char_code": "JPY",
+    "value": 53.7028
+  },
+  {
+    "num_code": 702,
+    "char_code": "SGD",
+    "value": 53.3841
+  },
+  {
+    "num_code": 124,
+    "char_code": "CAD",
+    "value": 53.0614
+  },
+  {
+    "num_code": 36,
+    "char_code": "AUD",
+    "value": 48.5922
+  },
+  {
+    "num_code": 944,
+    "char_code": "AZN",
+    "value": 42.3399
+  },
+  {
+    "num_code": 710,
+    "char_code": "ZAR",
+    "value": 42.3008
+  },
+  {
+    "num_code": 975,
+    "char_code": "BGN",
+    "value": 39.0908
+  },
+  {
+    "num_code": 949,
+    "char_code": "TRY",
+    "value": 38.4634
+  },
+  {
+    "num_code": 498,
+    "char_code": "MDL",
+    "value": 37.5591
+  },
+  {
+    "num_code": 203,
+    "char_code": "CZK",
+    "value": 31.5747
+  },
+  {
+    "num_code": 933,
+    "char_code": "BYN",
+    "value": 26.3038
+  },
+  {
+    "num_code": 934,
+    "char_code": "TMT",
+    "value": 20.5651
+  },
+  {
+    "num_code": 980,
+    "char_code": "UAH",
+    "value": 19.4894
+  },
+  {
+    "num_code": 348,
+    "char_code": "HUF",
+    "value": 19.0538
+  },
+  {
+    "num_code": 51,
+    "char_code": "AMD",
+    "value": 18.2959
+  },
+  {
+    "num_code": 985,
+    "char_code": "PLN",
+    "value": 16.3122
+  },
+  {
+    "num_code": 398,
+    "char_code": "KZT",
+    "value": 15.6056
+  },
+  {
+    "num_code": 946,
+    "char_code": "RON",
+    "value": 15.4788
+  },
+  {
+    "num_code": 986,
+    "char_code": "BRL",
+    "value": 13.6495
+  },
+  {
+    "num_code": 208,
+    "char_code": "DKK",
+    "value": 10.2984
+  },
+  {
+    "num_code": 156,
+    "char_code": "CNY",
+    "value": 10.1306
+  }
+]

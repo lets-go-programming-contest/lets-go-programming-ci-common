@@ -1,0 +1,142 @@
+[
+  {
+    "num_code": 300,
+    "char_code": "GRD",
+    "value": 73.56
+  },
+  {
+    "num_code": 56,
+    "char_code": "BEF",
+    "value": 61.4
+  },
+  {
+    "num_code": 980,
+    "char_code": "UAH",
+    "value": 52.86
+  },
+  {
+    "num_code": 792,
+    "char_code": "TRL",
+    "value": 42.6
+  },
+  {
+    "num_code": 246,
+    "char_code": "FIM",
+    "value": 41.66
+  },
+  {
+    "num_code": 826,
+    "char_code": "GBP",
+    "value": 40.97
+  },
+  {
+    "num_code": 250,
+    "char_code": "FRF",
+    "value": 37.76
+  },
+  {
+    "num_code": 960,
+    "char_code": "XDR",
+    "value": 36.16
+  },
+  {
+    "num_code": 352,
+    "char_code": "ISK",
+    "value": 34.45
+  },
+  {
+    "num_code": 208,
+    "char_code": "DKK",
+    "value": 33.25
+  },
+  {
+    "num_code": 372,
+    "char_code": "IEP",
+    "value": 31.45
+  },
+  {
+    "num_code": 578,
+    "char_code": "NOK",
+    "value": 30.8
+  },
+  {
+    "num_code": 752,
+    "char_code": "SEK",
+    "value": 29.61
+  },
+  {
+    "num_code": 840,
+    "char_code": "USD",
+    "value": 27.71
+  },
+  {
+    "num_code": 974,
+    "char_code": "BYR",
+    "value": 27.62
+  },
+  {
+    "num_code": 392,
+    "char_code": "JPY",
+    "value": 25.79
+  },
+  {
+    "num_code": 978,
+    "char_code": "EUR",
+    "value": 24.77
+  },
+  {
+    "num_code": 398,
+    "char_code": "KZT",
+    "value": 19.44
+  },
+  {
+    "num_code": 124,
+    "char_code": "CAD",
+    "value": 18.74
+  },
+  {
+    "num_code": 40,
+    "char_code": "ATS",
+    "value": 18
+  },
+  {
+    "num_code": 702,
+    "char_code": "SGD",
+    "value": 16.16
+  },
+  {
+    "num_code": 756,
+    "char_code": "CHF",
+    "value": 15.9
+  },
+  {
+    "num_code": 36,
+    "char_code": "AUD",
+    "value": 15.81
+  },
+  {
+    "num_code": 724,
+    "char_code": "ESP",
+    "value": 14.89
+  },
+  {
+    "num_code": 380,
+    "char_code": "ITL",
+    "value": 12.79
+  },
+  {
+    "num_code": 276,
+    "char_code": "DEM",
+    "value": 12.66
+  },
+  {
+    "num_code": 620,
+    "char_code": "PTE",
+    "value": 12.35
+  },
+  {
+    "num_code": 528,
+    "char_code": "NLG",
+    "value": 11.24
+  }
+]

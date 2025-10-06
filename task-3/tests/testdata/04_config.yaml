@@ -1,0 +1,2 @@
+input-file: "testdata/04_input.xml"
+output-file: ".output/subdir/one_more/04_output.json"

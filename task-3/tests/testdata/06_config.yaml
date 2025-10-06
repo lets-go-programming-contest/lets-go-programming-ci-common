@@ -1,0 +1,2 @@
+input-file: "tests/ci/testdata/not-exists.xml"
+output-file: ".output/06_output.json"

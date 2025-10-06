@@ -1,0 +1,147 @@
+[
+  {
+    "num_code": 428,
+    "char_code": "LVL",
+    "value": 1949.18
+  },
+  {
+    "num_code": 826,
+    "char_code": "GBP",
+    "value": 1814.06
+  },
+  {
+    "num_code": 372,
+    "char_code": "IEP",
+    "value": 1729.88
+  },
+  {
+    "num_code": 960,
+    "char_code": "XDR",
+    "value": 1682.07
+  },
+  {
+    "num_code": 954,
+    "char_code": "XEU",
+    "value": 1388.99
+  },
+  {
+    "num_code": 840,
+    "char_code": "USD",
+    "value": 1189
+  },
+  {
+    "num_code": 124,
+    "char_code": "CAD",
+    "value": 891.17
+  },
+  {
+    "num_code": 756,
+    "char_code": "CHF",
+    "value": 835.09
+  },
+  {
+    "num_code": 36,
+    "char_code": "AUD",
+    "value": 777.84
+  },
+  {
+    "num_code": 702,
+    "char_code": "SGD",
+    "value": 761.2
+  },
+  {
+    "num_code": 276,
+    "char_code": "DEM",
+    "value": 733.59
+  },
+  {
+    "num_code": 528,
+    "char_code": "NLG",
+    "value": 652.76
+  },
+  {
+    "num_code": 56,
+    "char_code": "BEF",
+    "value": 337.98
+  },
+  {
+    "num_code": 440,
+    "char_code": "LTL",
+    "value": 280.42
+  },
+  {
+    "num_code": 250,
+    "char_code": "FRF",
+    "value": 209.74
+  },
+  {
+    "num_code": 246,
+    "char_code": "FIM",
+    "value": 206.66
+  },
+  {
+    "num_code": 208,
+    "char_code": "DKK",
+    "value": 181.2
+  },
+  {
+    "num_code": 578,
+    "char_code": "NOK",
+    "value": 167.93
+  },
+  {
+    "num_code": 752,
+    "char_code": "SEK",
+    "value": 147.96
+  },
+  {
+    "num_code": 392,
+    "char_code": "JPY",
+    "value": 113
+  },
+  {
+    "num_code": 40,
+    "char_code": "ATS",
+    "value": 104.3
+  },
+  {
+    "num_code": 233,
+    "char_code": "EEK",
+    "value": 91.7
+  },
+  {
+    "num_code": 724,
+    "char_code": "ESP",
+    "value": 90.49
+  },
+  {
+    "num_code": 380,
+    "char_code": "ITL",
+    "value": 74.74
+  },
+  {
+    "num_code": 620,
+    "char_code": "PTE",
+    "value": 71.2
+  },
+  {
+    "num_code": 300,
+    "char_code": "GRD",
+    "value": 50.58
+  },
+  {
+    "num_code": 352,
+    "char_code": "ISK",
+    "value": 17.09
+  },
+  {
+    "num_code": 792,
+    "char_code": "TRL",
+    "value": 0.97
+  },
+  {
+    "num_code": 0,
+    "char_code": "",
+    "value": 0.64
+  }
+]

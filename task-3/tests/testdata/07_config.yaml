@@ -1,0 +1,2 @@
+input-file: "testdata/bad-format.xml"
+  output-file: ".output/07_output.json"
