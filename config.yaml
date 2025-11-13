@@ -86,3 +86,26 @@ tasks:
         include_dirs:
           - path_type: common
             path: task-3/tests
+  
+  - task_name: task-5
+    build:
+      mode: skip
+    lint:
+      mode: module
+      module_options:
+        configs:
+          - config_path:
+              path_type: common
+              path: task-5/.golangci.yaml
+            required: true
+          - config_path:
+              path_type: module
+              path: .golangci.yaml
+            required: false
+    test:
+      mode: makefile
+      makefile_options:
+        makefile_path:
+          path_type: common
+          path: "task-5/Makefile"
+        target: "gotest"

@@ -1,0 +1,253 @@
+package ci
+
+import (
+	"context"
+	"testing"
+	"time"
+
+	conveyer "{{.}}/pkg/conveyer"
+	handlers "{{.}}/pkg/handlers"
+
+	"github.com/stretchr/testify/require"
+	"golang.org/x/sync/errgroup"
+)
+
+const (
+	chansSize            = 256
+	undefinedData        = "undefined"
+	chanNotExistsMessage = "chan not found"
+)
+
+var testTimeout = time.Second
+
+func helperReadAll(
+	t *testing.T,
+	name string,
+	recv func(name string) (string, error),
+) ([]string, error) {
+	t.Helper()
+
+	results := []string{}
+
+	for {
+		data, err := recv(name)
+		if err != nil {
+			return nil, err
+		}
+
+		results = append(results, data)
+		if data == undefinedData {
+			break
+		}
+	}
+
+	return results, nil
+}
+
+func TestSendMethodChanNotExists(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	err := c.Send("not existed", "data")
+	require.ErrorContains(t, err, chanNotExistsMessage)
+}
+
+func TestRecvMethodChanNotExists(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	_, err := c.Recv("not existed")
+	require.ErrorContains(t, err, chanNotExistsMessage)
+}
+
+
+func TestTaskDecorator(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	c.RegisterDecorator(handlers.PrefixDecoratorFunc, "input", "d1-output")
+	c.RegisterDecorator(handlers.PrefixDecoratorFunc, "d1-output", "output")
+
+	ctx, cancel := context.WithTimeout(context.TODO(), testTimeout)
+	defer cancel()
+
+	errgr, ctx := errgroup.WithContext(ctx)
+	errgr.Go(func() error {
+		return c.Run(ctx)
+	})
+
+	require.NoError(t, c.Send("input", "val-1"))
+	require.NoError(t, c.Send("input", "decorated: val-2"))
+
+	require.NoError(t, errgr.Wait())
+
+	output, err := helperReadAll(t, "output", c.Recv)
+	require.NoError(t, err)
+
+	require.Equal(t, []string{
+		"decorated: val-1",
+		"decorated: val-2",
+		undefinedData,
+	}, output)
+}
+
+
+func TestTaskDecoratorError(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	c.RegisterDecorator(handlers.PrefixDecoratorFunc, "input", "d1-output")
+
+	ctx, cancel := context.WithTimeout(context.TODO(), testTimeout)
+	defer cancel()
+
+	errgr, ctx := errgroup.WithContext(ctx)
+	errgr.Go(func() error {
+		return c.Run(ctx)
+	})
+
+	require.NoError(t, c.Send("input", "val-1"))
+	require.NoError(t, c.Send("input", "decorated: val-2"))
+	require.NoError(t, c.Send("input", "val-3 no decorator"))
+
+	require.ErrorContains(t, errgr.Wait(), "can't be decorated")
+}
+
+func TestTaskMultiplexer(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	c.RegisterMultiplexer(
+		handlers.MultiplexerFunc,
+		[]string{"input1", "input2"},
+		"output",
+	)
+
+	ctx, cancel := context.WithTimeout(context.TODO(), testTimeout)
+	defer cancel()
+
+	errgr, ctx := errgroup.WithContext(ctx)
+	errgr.Go(func() error {
+		return c.Run(ctx)
+	})
+
+	require.NoError(t, c.Send("input1", "val-1"))
+	require.NoError(t, c.Send("input1", "val-2"))
+	require.NoError(t, c.Send("input2", "val-3"))
+	require.NoError(t, c.Send("input1", "no multiplexer"))
+
+	require.NoError(t, errgr.Wait())
+
+	output, err := helperReadAll(t, "output", c.Recv)
+	require.NoError(t, err)
+
+	require.Contains(t, output, "val-1")
+	require.Contains(t, output, "val-2")
+	require.Contains(t, output, "val-3")
+	require.Contains(t, output, "undefined")
+	require.NotContains(t, output, "no multiplexer")
+}
+
+func TestTaskSeparator(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	c.RegisterSeparator(
+		handlers.SeparatorFunc,
+		"input",
+		[]string{"output1", "output2", "output3"},
+	)
+
+	ctx, cancel := context.WithTimeout(context.TODO(), testTimeout)
+	defer cancel()
+
+	errgr, ctx := errgroup.WithContext(ctx)
+	errgr.Go(func() error {
+		return c.Run(ctx)
+	})
+
+	require.NoError(t, c.Send("input", "val-1"))
+	require.NoError(t, c.Send("input", "val-2"))
+	require.NoError(t, c.Send("input", "val-3"))
+	require.NoError(t, c.Send("input", "val-4"))
+	require.NoError(t, c.Send("input", "val-5"))
+
+	require.NoError(t, errgr.Wait())
+
+	output1, err := helperReadAll(t, "output1", c.Recv)
+	require.NoError(t, err)
+	require.Equal(t, []string{"val-1", "val-4", "undefined"}, output1)
+
+	output2, err := helperReadAll(t, "output2", c.Recv)
+	require.NoError(t, err)
+	require.Equal(t, []string{"val-2", "val-5", "undefined"}, output2)
+
+	output3, err := helperReadAll(t, "output3", c.Recv)
+	require.NoError(t, err)
+	require.Equal(t, []string{"val-3", "undefined"}, output3)
+}
+
+// helperDecorator is simple decorator.
+// Its only for test usage.
+func helperMsgDecorator(
+	t *testing.T,
+	msg string,
+) func(ctx context.Context, input, output chan string) error {
+	t.Helper()
+
+	return func(ctx context.Context, input, output chan string) error {
+		for {
+			select {
+			case <-ctx.Done():
+				return nil
+			case val := <-input:
+				output <- val + "-" + msg
+			}
+		}
+	}
+}
+
+func TestRunConveyer(t *testing.T) {
+	t.Parallel()
+
+	c := conveyer.New(chansSize)
+	c.RegisterDecorator(helperMsgDecorator(t, "d1"), "input", "d-1")
+	c.RegisterSeparator(handlers.SeparatorFunc, "d-1", []string{"s-1", "s-2", "s-3"})
+	c.RegisterDecorator(helperMsgDecorator(t, "sd1"), "s-1", "sd-1")
+	c.RegisterDecorator(helperMsgDecorator(t, "sd2"), "s-2", "sd-2")
+	c.RegisterDecorator(helperMsgDecorator(t, "sd3"), "s-3", "sd-3")
+	c.RegisterMultiplexer(handlers.MultiplexerFunc, []string{"sd-1", "sd-2", "sd-3", "empty"}, "m-1")
+	c.RegisterDecorator(handlers.PrefixDecoratorFunc, "m-1", "output")
+
+	ctx, cancel := context.WithTimeout(context.TODO(), testTimeout)
+	defer cancel()
+
+	errgr, ctx := errgroup.WithContext(ctx)
+	errgr.Go(func() error {
+		return c.Run(ctx)
+	})
+
+	input := []string{"v1", "v2", "v3", "v4", "v5"}
+	expected := []string{
+		"decorated: v1-d1-sd1",
+		"decorated: v2-d1-sd2",
+		"decorated: v3-d1-sd3",
+		"decorated: v4-d1-sd1",
+		"decorated: v5-d1-sd2",
+		undefinedData,
+	}
+
+	for _, val := range input {
+		require.NoError(t, c.Send("input", val))
+	}
+
+	require.NoError(t, errgr.Wait())
+
+	actual, err := helperReadAll(t, "output", c.Recv)
+	require.NoError(t, err)
+
+	require.Len(t, actual, len(expected))
+	for _, val := range expected {
+		require.Contains(t, actual, val)
+	}
+}

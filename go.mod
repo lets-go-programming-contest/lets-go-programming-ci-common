@@ -1,6 +1,6 @@
 module github.com/lets-go-programming-contest/lgp-ci-common
 
-go 1.23.2
+go 1.22.7
 
 require github.com/stretchr/testify v1.11.1
 
