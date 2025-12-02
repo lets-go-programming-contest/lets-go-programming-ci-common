@@ -64,7 +64,7 @@ func TestMyProgram(t *testing.T) {
 
 			var flag string
 			if tt.tag != "" {
-				flag = "-tags=" + tt.tag
+				flag = "-tags " + tt.tag
 			}
 
 			cmd := exec.CommandContext(ctx, bin, flag)
