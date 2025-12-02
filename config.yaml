@@ -109,3 +109,25 @@ tasks:
           path_type: common
           path: "task-5/Makefile"
         target: "gotest"
+
+  - task_name: task-8
+    build:
+      mode: module
+    lint:
+      mode: module
+      module_options:
+        configs:
+          - config_path:
+              path_type: common
+              path: task-8/.golangci.yaml
+            required: true
+          - config_path:
+              path_type: module
+              path: .golangci.yaml
+            required: false
+    test:
+      mode: module
+      module_options:
+        include_dirs:
+          - path_type: common
+            path: task-8/tests
