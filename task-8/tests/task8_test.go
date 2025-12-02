@@ -62,9 +62,9 @@ func TestMyProgram(t *testing.T) {
 			ctx, closeFn := context.WithTimeout(context.TODO(), testTimeout)
 			defer closeFn()
 
-			args := []string{}
+			var args []string
 			if tt.tag != "" {
-				args = append(args, "-tags", tt.tag)
+				args = append(args, "-tags ", tt.tag)
 			}
 
 			cmd := exec.CommandContext(ctx, bin, args...)
