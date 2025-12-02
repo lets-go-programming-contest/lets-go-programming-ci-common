@@ -72,12 +72,10 @@ func TestMyProgram(t *testing.T) {
 			stdErrBuffer := bytes.NewBuffer([]byte{})
 			cmd.Stderr = stdErrBuffer
 
-			err := cmd.Run()
+			output, err := cmd.Output()
 			require.NoError(t, err, internalTestError{
 				reason: err,
 			})
-
-			output, err := cmd.CombinedOutput()
 
 			require.Equal(t, tt.expected, string(output), "Output is not correct. Must be \"environment log_level\".")
 		})
