@@ -62,12 +62,12 @@ func TestMyProgram(t *testing.T) {
 			ctx, closeFn := context.WithTimeout(context.TODO(), testTimeout)
 			defer closeFn()
 
-			var flag string
+			args := []string{}
 			if tt.tag != "" {
-				flag = "-tags " + tt.tag
+				args = append(args, "-tags", tt.tag)
 			}
 
-			cmd := exec.CommandContext(ctx, bin, flag)
+			cmd := exec.CommandContext(ctx, bin, args...)
 
 			stdErrBuffer := bytes.NewBuffer([]byte{})
 			cmd.Stderr = stdErrBuffer
