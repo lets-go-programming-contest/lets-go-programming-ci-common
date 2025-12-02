@@ -5,6 +5,7 @@ import (
 	"context"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"testing"
 	"time"
 
@@ -56,16 +57,15 @@ func TestMyProgram(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			bin := os.Getenv("BUILD_BIN")
+			bin := filepath.Join(os.Getenv("BUILD_BIN"), "service")
+
 			ctx, closeFn := context.WithTimeout(context.TODO(), testTimeout)
 			defer closeFn()
 
-			var args []string
+			args := []string{}
 			if tt.tag != "" {
 				args = append(args, "-tags", tt.tag)
 			}
-
-			args = append(args, "service")
 
 			cmd := exec.CommandContext(ctx, bin, args...)
 
