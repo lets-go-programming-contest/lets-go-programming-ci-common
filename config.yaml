@@ -110,6 +110,29 @@ tasks:
           path: "task-5/Makefile"
         target: "gotest"
 
+  - task_name: task-6
+    build:
+      mode: skip
+    lint:
+      mode: module
+      module_options:
+        configs:
+          - config_path:
+              path_type: common
+              path: task-6/.golangci.yaml
+            required: true
+          - config_path:
+              path_type: module
+              path: .golangci.yaml
+            required: false
+    test:
+      mode: makefile
+      makefile_options:
+        makefile_path:
+          path_type: common
+          path: "task-6/Makefile"
+        target: "check-coverage"
+
   - task_name: task-8
     build:
       mode: module
