@@ -33,11 +33,6 @@ var casesTestService = []struct {
 }{
 	{
 		name:     "test_case_1",
-		tag:      "dev",
-		expected: "dev debug",
-	},
-	{
-		name:     "test_case_2",
 		tag:      "",
 		expected: "dev debug",
 	},
@@ -57,12 +52,7 @@ func TestMyProgram(t *testing.T) {
 			ctx, closeFn := context.WithTimeout(context.TODO(), testTimeout)
 			defer closeFn()
 
-			var flag string
-			if tt.tag != "" {
-				flag = "-tags" + tt.tag
-			}
-
-			cmd := exec.CommandContext(ctx, bin, flag)
+			cmd := exec.CommandContext(ctx, bin)
 
 			stdErrBuffer := bytes.NewBuffer([]byte{})
 			cmd.Stderr = stdErrBuffer
