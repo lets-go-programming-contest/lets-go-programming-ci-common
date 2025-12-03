@@ -14,6 +14,8 @@ linters:
     - dupl
     - errcheck
     - exhaustruct
+    - funlen
+    - gci
   fast: false
 
 issues:
