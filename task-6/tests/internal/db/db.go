@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 )
 
 type Database interface {
@@ -21,7 +22,7 @@ func (service DBService) GetNames() ([]string, error) {
 
 	rows, err := service.DB.Query(query)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("db query: %w", err)
 	}
 	defer rows.Close()
 
@@ -31,13 +32,14 @@ func (service DBService) GetNames() ([]string, error) {
 		var name string
 
 		if err := rows.Scan(&name); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("rows scanning: %w", err)
 		}
 
 		names = append(names, name)
 	}
+
 	if err := rows.Err(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("rows error: %w", err)
 	}
 
 	return names, nil
@@ -48,7 +50,7 @@ func (service DBService) GetUniqueNames() ([]string, error) {
 
 	rows, err := service.DB.Query(query)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("db query: %w", err)
 	}
 	defer rows.Close()
 
@@ -58,13 +60,14 @@ func (service DBService) GetUniqueNames() ([]string, error) {
 		var value string
 
 		if err := rows.Scan(&value); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("rows scanning: %w", err)
 		}
 
 		values = append(values, value)
 	}
+
 	if err := rows.Err(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("rows error: %w", err)
 	}
 
 	return values, nil

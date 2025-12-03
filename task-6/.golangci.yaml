@@ -10,6 +10,10 @@ linters:
     - gomnd
     - depguard
     - tagliatelle
+    - varnamelen
+    - dupl
+    - errcheck
+    - exhaustruct
   fast: false
 
 issues:
