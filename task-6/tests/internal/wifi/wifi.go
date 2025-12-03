@@ -24,7 +24,7 @@ func (service WiFiService) GetAddresses() ([]net.HardwareAddr, error) {
 		return nil, err
 	}
 
-	addrs = make([]net.HardwareAddr, 0, len(interfaces))
+	addrs := make([]net.HardwareAddr, 0, len(interfaces))
 
 	for _, iface := range interfaces {
 		addrs = append(addrs, iface.HardwareAddr)
@@ -39,7 +39,7 @@ func (service WiFiService) GetNames() ([]string, error) {
 		return nil, err
 	}
 
-	names = make([]string, 0, len(interfaces))
+	names := make([]string, 0, len(interfaces))
 
 	for _, iface := range interfaces {
 		names = append(names, iface.Name)
