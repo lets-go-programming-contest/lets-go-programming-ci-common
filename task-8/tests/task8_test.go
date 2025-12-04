@@ -34,7 +34,7 @@ var casesTestService = []struct {
 	{
 		name:     "test_case_1",
 		tag:      "",
-		expected: "dev debug",
+		expected: "prod error",
 	},
 }
 
